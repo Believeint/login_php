@@ -29,7 +29,7 @@ class DB
         return self::$_instance;
     }
 
-
+    // Executa a Query
     public function query($sql, $params = array())
     {
         $this->_error = false;
@@ -51,6 +51,7 @@ class DB
         return $this;
     }
 
+    // Realiza operações CRUD
     public function action($action, $table, $where = array()) {
         if(count($where) === 3)
         {
@@ -71,16 +72,63 @@ class DB
         }
     }
 
+    // Retorna resultados especificados
     public function get($table, $where)
     {
         return $this->action('SELECT *', $table, $where);
     }
 
+    // Insere dados
+    public function insert($table, $fields = array()) {
+
+            $keys = array_keys($fields);
+            $values = '';
+            $x = 1;
+
+            foreach ($fields as $field) {
+                $values .= '?';
+                if($x < count($fields)) {
+                    $values .= ', ';
+                }
+                $x++;
+            }
+
+        $sql = "INSERT INTO {$table} (`" . implode('`, `', $keys) . "`) VALUES ({$values})";
+            if(!$this->query($sql, $fields)->error()) {
+                return true;
+            } else {
+            return false;
+            }
+    }
+
+    // Atualiza dados
+    public function update($table, $id ,$fields = array()) {
+        $set = '';
+        $x = 1;
+
+        foreach ($fields as $name => $value) {
+            $set .= "{$name} = ?";
+            if($x < count($fields)) {
+                $set .= ', ';
+            }
+            $x++;
+        }
+
+        $sql = "UPDATE {$table} SET {$set} WHERE id = {$id}";
+        if(!$this->query($sql, $fields)->error()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Deleta dados
     public function Delete($table, $where)
     {
         return $this->action($table, $where);
     }
 
+    // Retorna o estado erro da ultima ação
     public function error() {
         return $this->_error;
     }
