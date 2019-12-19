@@ -33,6 +33,7 @@ class DB
     public function query($sql, $params = array())
     {
         $this->_error = false;
+
         if($this->_query = $this->_pdo->prepare($sql)) {
             $x = 1;
             if(count($params)) {
@@ -125,7 +126,10 @@ class DB
     // Deleta dados
     public function Delete($table, $where)
     {
-        return $this->action($table, $where);
+
+            return $this->action($table, $where);
+
+
     }
 
     // Retorna o estado erro da ultima ação

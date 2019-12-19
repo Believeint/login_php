@@ -15,14 +15,15 @@ $GLOBALS['config'] = array(
         'cookie_expiry' => 604800
     ),
     'session' => array(
-        'session_name' => 'user'
+        'session_name' => 'user',
+        'token_name' => 'token'
     )
 );
 
 // AutoLoader de Classes
 spl_autoload_register(function ($class) {
-    require_once 'Model/' . $class . '.php';
+    require_once '../Model/' . $class . '.php';
 });
 
-require_once 'Functions/sanitize.php';
+require_once '../Functions/sanitize.php';
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Core/init.php';
+require_once '../Core/init.php';
 
 /*$userInsert = DB::getInstance()->insert('usuarios', array(
     'nome_usuario' => 'Joana',
@@ -30,6 +30,8 @@ if($userUpdate) {
 } else {
     echo "Não foi possível atualizar usuario";
 }*/
+
+
 
 
 
