@@ -2,13 +2,11 @@
 
 require_once '../Core/init.php';
 
-var_dump(Token::check(Input::get('token')));
-
 if(Input::exists()) {
     if(Token::check(Input::get('token'))) {
     $validate = new Validate();
-    $validation = $validate->check($_POST, array(
-        'n_usuario' => array(
+    $validate->check($_POST, array(
+        'nome_usuario' => array(
             'obrigatorio' => true,
             'min' => 2,
             'max' => 20,
@@ -28,22 +26,21 @@ if(Input::exists()) {
             'max' => 50
         )));
 
-
-
     if($validate->passed()) {
-        echo "Pode Registrar!";
+        Session::flash('success', 'Usuário Registrado com sucesso!');
+        header("Location: index.php");
     } else {
-        print_r($validation->errors());
+        print_r($validate->errors());
     }
     }
 }
 ?>
 
-<form action="" method="post">
+<form method="post">
 
     <div class="field">
-        <label for="n_usuario">Nome de Usuário</label>
-        <input type="text" name="n_usuario" id="n_usuario" value="<?php echo escape(Input::get('n_usuario'));?>" autocomplete="off">
+        <label for="nome_usuario">Nome de Usuário</label>
+        <input type="text" name="nome_usuario" id="nome_usuario" value="<?php echo escape(Input::get('nome_usuario'));?>" autocomplete="off">
     </div>
 
     <div class="field">
