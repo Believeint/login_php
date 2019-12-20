@@ -32,7 +32,7 @@ if($userUpdate) {
 }*/
 
  if(Session::exists('home')) {
- echo Session::flash('home');
+    echo Session::flash('home');
  }
 
 

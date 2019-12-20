@@ -40,8 +40,10 @@ if(Input::exists()) {
 
             ));
 
-            Session::flash("home", "Registrado com succeso! Agora você pode Logar.");
-            header('Location: index.php');
+
+            Session::flash('home', 'Cadastro realizado com sucesso! Agora você pode logar');
+            Redirect::to(404);
+
 
         } catch (Exception $e) {
             die($e->getMessage());
