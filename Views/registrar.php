@@ -27,8 +27,25 @@ if(Input::exists()) {
         )));
 
     if($validate->passed()) {
-        Session::flash('success', 'Usuário Registrado com sucesso!');
-        header("Location: index.php");
+        $user = new Usuario();
+        $salt = Hash::salt();
+        try {
+            $user->create(array(
+                    'nome_usuario' => Input::get("nome_usuario"),
+                    'senha' => Hash::make(Input::get("s_usuario").$salt),
+                    'salt' => $salt,
+                    'nome' => Input::get("nome_u"),
+                    'data_cadastro' => date('Y-m-d H:i:s'),
+                    'grupo' => 1,
+
+            ));
+
+            Session::flash("home", "Registrado com succeso! Agora você pode Logar.");
+            header('Location: index.php');
+
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
     } else {
         print_r($validate->errors());
     }

@@ -21,13 +21,14 @@ class Session
         }
     }
 
+    // Enviar mensagens aos usuários por session e limpa ao atualizar
     public static function flash($name, $string = '') {
         if(self::exists($name)) {
             $session = self::get($name);
             self::delete($name);
             return $session;
         } else {
-            self::put($name, 'Usuário Registrado com succeso!');
+            self::put($name, $string);
         }
         return '';
         }
