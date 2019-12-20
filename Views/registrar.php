@@ -42,7 +42,7 @@ if(Input::exists()) {
 
 
             Session::flash('home', 'Cadastro realizado com sucesso! Agora você pode logar');
-            Redirect::to(404);
+            Redirect::to('index.php');
 
 
         } catch (Exception $e) {
@@ -55,7 +55,7 @@ if(Input::exists()) {
 }
 ?>
 
-<form method="post">
+<form action="" method="post">
 
     <div class="field">
         <label for="nome_usuario">Nome de Usuário</label>

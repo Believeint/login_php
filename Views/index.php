@@ -35,4 +35,6 @@ if($userUpdate) {
     echo Session::flash('home');
  }
 
+ echo Session::get(Config::get('session/session_name'));
+
 

@@ -20,7 +20,7 @@ class Validate
                 $item = escape($item);
 
                 if($rule === "obrigatorio" && empty($value)) {
-                    $this->addError("{$item} é Obrigatório.");
+                    $this->addError("O campo {$item} é Obrigatório.");
                 } else if(!empty($value)) {
                     switch ($rule) {
                         case 'min';
