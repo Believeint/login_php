@@ -16,9 +16,9 @@ if(Input::exists()) {
             $login = $user->login(Input::get('nome_usuario'), Input::get('senha_usuario'));
 
             if($login) {
-                echo "Success!";
+                Redirect::to("index.php");
             } else {
-                echo "Sorry, Log in Failed!";
+                echo "Desculpe, Não foi possível logar!";
             }
         } else {
             foreach ($validation->errors() as $error) {

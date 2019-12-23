@@ -6,12 +6,27 @@ class Usuario
     private $_db;
     private  $_data;
     private $_sessionName;
+    private $_isLoggedIn;
 
 
-    public function __construct()
+    public function __construct($usuario = null)
     {
         $this->_db = DB::getInstance();
         $this->_sessionName = Config::get('session/session_name');
+
+        if(!$usuario) {
+            if(Session::exists($this->_sessionName)) {
+                $usuario = Session::get($this->_sessionName);
+
+                    if($this->find($usuario)) {
+                        $this->_isLoggedIn = true;
+                    } else {
+                    //process logout
+                }
+            }
+        } else {
+            $this->find($usuario);
+        }
     }
 
     public function create($fields = array()) {
@@ -50,6 +65,10 @@ class Usuario
 
         return false;
 
+    }
+
+    public function isLoggedIn() {
+        return $this->_isLoggedIn;
     }
 
 

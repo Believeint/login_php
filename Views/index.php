@@ -32,9 +32,26 @@ if($userUpdate) {
 }*/
 
  if(Session::exists('home')) {
-    echo Session::flash('home');
+    echo '<p>' . Session::flash('home') . '</p>';
  }
 
- echo Session::get(Config::get('session/session_name'));
+ $user = new Usuario();
+ if($user->isLoggedIn()) {
+     ?>
+    <p>Olá, <a href="#"><?php echo escape($user->data()->nome_usuario); ?></a>!</p>
+     <ul>
+         <li><a href="logout.php">Sair</a></li>
+     </ul>
+     <?php
+ } else {
+     echo "<p>Você precisa <a href='login.php'>logar</a> ou <a href='registrar.php'>registrar</a>.</p>";
+ }
+
+
+
+
+
+
+
 
 
